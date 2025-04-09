@@ -896,7 +896,7 @@
           <!-- <p>First 150 signups get 2 months free access!</p> -->
         </div>
         
-        <div class="signup-form animate-on-scroll">
+        <!-- <div class="signup-form animate-on-scroll">
           <form id="early-access-form" action="/signup" method="POST">
             <div class="form-group">
               <input type="email" class="form-control" id="email" placeholder="Your email address" required>
@@ -904,7 +904,40 @@
             <button type="submit" class="btn">Reserve Your Spot</button>
           </form>
           <p id="signup-message" style="margin-top: 1rem; display: none;"></p>
+        </div> -->
+
+        <!-- formspree form section -->
+         <!-- modify this form HTML and place wherever you want your form -->
+        <!-- <form id="early-access-form"
+        action="https://formspree.io/f/xnnpljwg"
+        method="POST"
+        >
+        <label>
+          Your email:
+          <input type="email" name="email">
+        </label>
+        <label>
+          Your message:
+          <textarea name="message"></textarea>
+        </label>
+        <button type="submit">Send</button>
+        </form> -->
+        <div class="signup-form animate-on-scroll">
+          <form id="early-access-form" action="https://formspree.io/f/xnnpljwg" method="POST">
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your email address" required>
+            </div>
+            <!-- Optional: Include additional fields (e.g., message) if needed.
+                 To include the message field, uncomment the block below.
+            <div class="form-group">
+              <textarea name="message" class="form-control" placeholder="Your message"></textarea>
+            </div>
+            -->
+            <button type="submit" class="btn">Reserve Your Spot</button>
+          </form>
+          <p id="signup-message" style="margin-top: 1rem; display: none;"></p>
         </div>
+        
       </div>
       <div class="bg-glow glow-2"></div>
     </section>
