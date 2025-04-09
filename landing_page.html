@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jarvis AI - The Ultimate Research & Content Generation Agent</title>
+    <meta name="description" content="Jarvis AI is the only research and content generation agent you'll ever need. Summarize, translate, and analyze documents, books, websites, and more." />
+    <meta name="author" content="Jarvis AI" />
+
+    <meta property="og:title" content="Jarvis AI - The Ultimate Research & Content Generation Agent" />
+    <meta property="og:description" content="Jarvis AI is the only research and content generation agent you'll ever need. Summarize, translate, and analyze documents, books, websites, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jarvis_ai" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+    <style>
+      :root {
+        --jarvis-dark: #1A1F2C;
+        --jarvis-purple: #9b87f5;
+        --jarvis-purple-light: #c4b8f8;
+        --jarvis-magenta: #e56fe5;
+        --jarvis-blue: #1EAEDB;
+        --jarvis-blue-light: #7cd3f7;
+        --jarvis-orange: #ff6b6b;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      
+      body {
+        background-color: var(--jarvis-dark);
+        color: white;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+      
+      p {
+        margin-bottom: 1rem;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      
+      .btn {
+        display: inline-block;
+        background: linear-gradient(90deg, var(--jarvis-purple), var(--jarvis-magenta));
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+      }
+      
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(155, 135, 245, 0.3);
+      }
+      
+      /* NAVBAR */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(26, 31, 44, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, var(--jarvis-purple), var(--jarvis-magenta));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+      
+      .nav-links li {
+        margin-left: 2rem;
+      }
+      
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-links a:hover {
+        color: var(--jarvis-purple);
+      }
+      
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+      
+      .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: white;
+        transition: all 0.3s ease;
+      }
+      
+      /* HERO SECTION */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-top: 5rem;
+      }
+      
+      .hero-content {
+        max-width: 700px;
+      }
+      
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .gradient-text {
+        background: linear-gradient(to right, var(--jarvis-purple), var(--jarvis-magenta), var(--jarvis-blue));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .hero-buttons .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .hero-image {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        max-width: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      /* FEATURES SECTION */
+      .features {
+        padding: 6rem 0;
+        position: relative;
+      }
+      
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+      
+      .section-header h2 {
+        font-size: 2.5rem;
+        display: inline-block;
+      }
+      
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        height: 100%;
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(155, 135, 245, 0.2);
+      }
+      
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--jarvis-purple), var(--jarvis-magenta));
+      }
+      
+      .feature-icon svg {
+        width: 30px;
+        height: 30px;
+        fill: white;
+      }
+      
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      /* OUTPUTS SECTION */
+      .outputs {
+        padding: 6rem 0;
+        background: linear-gradient(180deg, var(--jarvis-dark), rgba(26, 31, 44, 0.95));
+      }
+      
+      .outputs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      
+      .output-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .output-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(155, 135, 245, 0.2);
+      }
+      
+      .output-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1rem;
+      }
+      
+      /* BENEFITS SECTION */
+      .benefits {
+        padding: 6rem 0;
+        position: relative;
+      }
+      
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      
+      .benefit-card {
+        border-radius: 1rem;
+        overflow: hidden;
+        height: 100%;
+      }
+      
+      .benefit-header {
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .icon-circle {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .benefit-body {
+        padding: 1.5rem;
+      }
+      
+      /* USE CASES SECTION */
+      .use-cases {
+        padding: 6rem 0;
+        background: rgba(26, 31, 44, 0.8);
+      }
+      
+      .use-case-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+      }
+      
+      .use-case-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+      }
+      
+      .use-case-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      
+      .use-case-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--jarvis-purple), var(--jarvis-blue));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+      }
+      
+      /* SIGNUP SECTION */
+      .signup {
+        padding: 6rem 0;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(26, 31, 44, 0.9), var(--jarvis-dark));
+      }
+      
+      .signup-form {
+        max-width: 500px;
+        margin: 2rem auto;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 1rem;
+      }
+      
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-control {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+      }
+      
+      .form-control:focus {
+        outline: none;
+        border-color: var(--jarvis-purple);
+      }
+      
+      /* FOOTER */
+      footer {
+        background: rgba(20, 24, 33, 0.9);
+        padding: 3rem 0;
+        text-align: center;
+      }
+      
+      .footer-nav {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      
+      .footer-nav a {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 1rem;
+        text-decoration: none;
+      }
+      
+      .footer-nav a:hover {
+        color: var(--jarvis-purple);
+      }
+      
+      .social-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+      }
+      
+      .social-link:hover {
+        background: var(--jarvis-purple);
+        transform: translateY(-3px);
+      }
+      
+      /* ANIMATIONS */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+      
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+      
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* BACKGROUND EFFECTS */
+      .bg-mesh {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(rgba(155, 135, 245, 0.1) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+        z-index: -1;
+      }
+      
+      .bg-glow {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: var(--jarvis-purple);
+        filter: blur(100px);
+        opacity: 0.15;
+        z-index: -1;
+      }
+      
+      .glow-1 {
+        top: 10%;
+        left: -5%;
+        background: var(--jarvis-purple);
+      }
+      
+      .glow-2 {
+        bottom: 20%;
+        right: -5%;
+        background: var(--jarvis-magenta);
+      }
+      
+      .glow-3 {
+        top: 60%;
+        left: 30%;
+        background: var(--jarvis-blue);
+      }
+      
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+        
+        .hero-image {
+          max-width: 45%;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .hero {
+          text-align: center;
+          padding-top: 7rem;
+        }
+        
+        .hero-content {
+          margin: 0 auto;
+        }
+        
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero-buttons {
+          justify-content: center;
+        }
+        
+        .hero-image {
+          position: relative;
+          max-width: 80%;
+          margin: 3rem auto 0;
+        }
+        
+        .hamburger {
+          display: block;
+        }
+        
+        .nav-links {
+          position: fixed;
+          left: -100%;
+          top: 5rem;
+          flex-direction: column;
+          background: rgba(26, 31, 44, 0.95);
+          backdrop-filter: blur(10px);
+          width: 100%;
+          text-align: center;
+          transition: 0.3s;
+          padding: 2rem 0;
+        }
+        
+        .nav-links.active {
+          left: 0;
+        }
+        
+        .nav-links li {
+          margin: 1rem 0;
+        }
+        
+        .hamburger.active .bar:nth-child(2) {
+          opacity: 0;
+        }
+        
+        .hamburger.active .bar:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+        
+        .hamburger.active .bar:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+        
+        .section-header h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav>
+      <div class="logo">JARVIS AI</div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#signup" class="btn">Sign Up</a></li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content animate-on-scroll">
+          <h1>Meet <span class="gradient-text">Jarvis AI</span> - The only research and content generation agent you'll ever need.</h1>
+          <p>Coming June, 2025</p>
+          <p>The Ultimate Research & Content Generation Agent that researches, write documents and style it for you. Makes you productive and saves you money.</p>
+          <div class="hero-buttons">
+            <a href="#features" class="btn">Explore Features</a>
+            <a href="#signup" class="btn btn-secondary">Get Early Access</a>
+          </div>
+        </div>
+      </div>
+      <div class="bg-mesh"></div>
+      <div class="bg-glow glow-1"></div>
+      <div class="bg-glow glow-2"></div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">How Jarvis AI Works</h2>
+          <p>A revolutionary AI agent that transforms how you research, learn, and create content.</p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Upload & Analyze</h3>
+            <p>Upload URLs, documents, or books of any size and get instant summaries, translations, reports, and more.</p>
+          </div>
+          
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3>Deep Search</h3>
+            <p>Scrapes the entire internet, PDF files, podcasts, YouTube links to deliver profound research document with text, tables, codes, and references.</p>
+          </div>
+          
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3>Comprehensive Learning</h3>
+            <p>Not just outputs – get finished and polished documents ready for use, greatly reducing research time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-glow glow-3"></div>
+    </section>
+    
+    <!-- Outputs Section -->
+    <section id="outputs" class="outputs">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">Polished, Ready-to-Use Outputs</h2>
+          <p>Not just raw text like other AI tools - get finished, formatted documents</p>
+        </div>
+        
+        <div class="outputs-grid">
+          <div class="output-card animate-on-scroll">
+            <div class="output-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <line x1="10" y1="9" x2="8" y2="9"/>
+              </svg>
+            </div>
+            <h3>PDF Documents</h3>
+            <p>Get professionally formatted PDFs with proper styling, headers, and formatting.</p>
+          </div>
+          
+          <div class="output-card animate-on-scroll">
+            <div class="output-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3>Microsoft Word</h3>
+            <p>Generate .docx files that you can easily open and edit in Microsoft Word or Google Docs.</p>
+          </div>
+          
+          <div class="output-card animate-on-scroll">
+            <div class="output-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3>HTML Files</h3>
+            <p>Create web-ready HTML documents for publishing online or embedding in websites.</p>
+          </div>
+          
+          <div class="output-card animate-on-scroll">
+            <div class="output-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/>
+                <line x1="9" y1="9" x2="10" y2="9"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="15" y2="17"/>
+              </svg>
+            </div>
+            <h3>Markdown</h3>
+            <p>Export clean Markdown files, perfect for documentation, GitHub, or note-taking apps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">What It Does For You</h2>
+          <p>Transform how you work, learn, and create with Jarvis AI</p>
+        </div>
+        
+        <div class="benefits-grid">
+          <div class="benefit-card animate-on-scroll" style="background: rgba(255, 255, 255, 0.05);">
+            <div class="benefit-header" style="background: linear-gradient(to right, var(--jarvis-purple), var(--jarvis-purple-light));">
+              <div class="icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+                  <line x1="16" y1="8" x2="2" y2="22"/>
+                  <line x1="17.5" y1="15" x2="9" y2="15"/>
+                </svg>
+              </div>
+            </div>
+            <div class="benefit-body">
+              <h3>Makes You Smarter</h3>
+              <p>Access vast knowledge pools instantly to make better-informed decisions and deepen your understanding.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-card animate-on-scroll" style="background: rgba(255, 255, 255, 0.05);">
+            <div class="benefit-header" style="background: linear-gradient(to right, var(--jarvis-magenta), var(--jarvis-purple));">
+              <div class="icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <div class="benefit-body">
+              <h3>Saves Research Time</h3>
+              <p>Cut your research time by up to 80% with comprehensive analysis delivered in minutes.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-card animate-on-scroll" style="background: rgba(255, 255, 255, 0.05);">
+            <div class="benefit-header" style="background: linear-gradient(to right, var(--jarvis-blue), var(--jarvis-blue-light));">
+              <div class="icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="benefit-body">
+              <h3>Increases Productivity</h3>
+              <p>Focus on applying insights rather than gathering them, dramatically boosting your output.</p>
+            </div>
+          </div>
+          
+          <div class="benefit-card animate-on-scroll" style="background: rgba(255, 255, 255, 0.05);">
+            <div class="benefit-header" style="background: linear-gradient(to right, var(--jarvis-orange), var(--jarvis-magenta));">
+              <div class="icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"/>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+            </div>
+            <div class="benefit-body">
+              <h3>Reduces Costs</h3>
+              <p>Save your organization money by minimizing the hours spent on research and content creation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-mesh"></div>
+    </section>
+    
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="use-cases">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">Real-World Use Cases</h2>
+          <p>See how Jarvis AI transforms tasks across different fields</p>
+        </div>
+        
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3>For Students</h3>
+          </div>
+          <p>Condense lengthy case studies and textbooks into digestible summaries. An MBA student can transform a 50-page case study into key insights in minutes.</p>
+        </div>
+        
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3>For Professionals</h3>
+          </div>
+          <p>Create comprehensive synergy proposals between your company's tech products and competitors' offerings without spending hours on research.</p>
+        </div>
+        
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3>For Educators</h3>
+          </div>
+          <p>Generate 200 questions for an assignment based on any book, saving hours of preparation time while ensuring comprehensive coverage of the topic.</p>
+        </div>
+        
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>For Corporations</h3>
+          </div>
+          <p>Analyze industry reports like McKinsey's and perform deep research to identify AI market trends and opportunities without dedicated research teams.</p>
+        </div>
+        
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+                <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+              </svg>
+            </div>
+            <h3>For Developers</h3>
+          </div>
+          <p>Create comprehensive documentation for your GitHub code, treating Jarvis AI as your junior developer to save valuable coding time.</p>
+        </div>
+
+        <div class="use-case-card animate-on-scroll">
+            <div class="use-case-header">
+              <div class="use-case-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <h3>For Individuals</h3>
+            </div>
+            <p>Learn any topic and generate well-structured notes, helping you absorb and retain information more effectively.</p>
+          </div>
+      </div>
+    </section>
+    
+    <!-- Signup Section -->
+    <section id="signup" class="signup">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">Get Early Access</h2>
+          <p>Coming June, 2025.</p>
+          <h3 class="gradient-text">First 150 signups get 2 months free access!</h3>
+          <!-- <p>First 150 signups get 2 months free access!</p> -->
+        </div>
+        
+        <div class="signup-form animate-on-scroll">
+          <form id="early-access-form" action="/signup" method="POST">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" placeholder="Your email address" required>
+            </div>
+            <button type="submit" class="btn">Reserve Your Spot</button>
+          </form>
+          <p id="signup-message" style="margin-top: 1rem; display: none;"></p>
+        </div>
+      </div>
+      <div class="bg-glow glow-2"></div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-nav">
+          <a href="#features">Features</a>
+          <a href="#outputs">Outputs</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#use-cases">Use Cases</a>
+          <a href="#signup">Sign Up</a>
+        </div>
+        
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        
+        <p>&copy; 2025 Jarvis AI. All rights reserved.</p>
+      </div>
+    </footer>
+    
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
+    <script>
+      // Mobile menu toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (hamburger) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+      }
+      
+      // Close mobile menu when clicking on links
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+      
+      // Animate elements on scroll
+      const observerOptions = {
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.observe(element);
+      });
+      
+      // Form submission
+      // const form = document.getElementById('early-access-form');
+      // const message = document.getElementById('signup-message');
+      
+      // if (form) {
+      //   form.addEventListener('submit', (e) => {
+      //     e.preventDefault();
+      //     const email = document.getElementById('email').value;
+          
+      //     // Store in localStorage (in a real app, you'd send this to a server)
+      //     const emails = JSON.parse(localStorage.getItem('jarvis-signups') || '[]');
+      //     emails.push(email);
+      //     localStorage.setItem('jarvis-signups', JSON.stringify(emails));
+          
+      //     // Show success message
+      //     message.textContent = 'Thanks for signing up! You\'re on the early access list.';
+      //     message.style.color = 'var(--jarvis-purple)';
+      //     message.style.display = 'block';
+          
+      //     // Reset form
+      //     form.reset();
+      //   });
+      // }
+      
+      // Add parallax effect to background elements
+      document.addEventListener('mousemove', (e) => {
+        const glows = document.querySelectorAll('.bg-glow');
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        glows.forEach((glow, index) => {
+          const speed = 30 * (index + 1);
+          const xOffset = (x - 0.5) * speed;
+          const yOffset = (y - 0.5) * speed;
+          
+          glow.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
+      });
+    </script>
+  </body>
+</html>
