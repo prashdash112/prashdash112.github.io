@@ -577,6 +577,42 @@
           font-size: 2rem;
         }
       }
+      /* Screenshots Section */
+      /* Screenshots Grid styling */
+      .screenshots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* Standard screenshot card styling */
+      .screenshot-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        overflow: hidden;
+        padding: 1rem; /* Optional: adds some spacing around the image */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Images inside screenshot cards */
+      .screenshot-card img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Specific styling for the smaller images */
+      .screenshot-small img {
+        width: auto; /* Do not force the image to fill the container */
+        max-height: 80%;
+        max-width: 110%;       /* Adjust this value as needed */
+        margin: 0 auto;       /* Center the image */
+      }
+
+
     </style>
   </head>
   <body>
@@ -795,7 +831,28 @@
       </div>
       <div class="bg-mesh"></div>
     </section>
-    
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="gradient-text">Screenshots</h2>
+          <p>See our application in action.</p>
+        </div>
+        <div class="screenshots-grid">
+          <div class="screenshot-card screenshot-small animate-on-scroll">
+            <img src="images/screenshot1.png" alt="Screenshot 1">
+          </div>
+          <div class="screenshot-card screenshot-small animate-on-scroll">
+            <img src="images/screenshot2.png" alt="Screenshot 2">
+          </div>
+          <div class="screenshot-card animate-on-scroll">
+            <img src="images/screenshot3.png" alt="Screenshot 3">
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Use Cases Section -->
     <section id="use-cases" class="use-cases">
       <div class="container">
